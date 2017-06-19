@@ -7,7 +7,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 public class NoteBook extends JFrame {
-	TreeSet<Person> ts = new TreeSet<Person>();
+	// TreeSet<Person> ts = new TreeSet<Person>();
+	TreeMap<String, Person> tm = new TreeMap<String, Person>();
 
 	public NoteBook() {
 		super("Note Book");
@@ -90,10 +92,13 @@ public class NoteBook extends JFrame {
 				Pattern pattern = Pattern.compile("\\+\\d{2}\\(\\d{3}\\)\\d{2}-\\d{2}-\\d{3}");
 				Matcher matcher = pattern.matcher(phoneFld.getText());
 				if (matcher.matches()) {
-					ts.add(new Person(nameFld.getText(), phoneFld.getText()));
-					cntFld.setText(Integer.toString(ts.size()));
+					// ts.add(new Person(nameFld.getText(),
+					// phoneFld.getText()));
+					// cntFld.setText(Integer.toString(ts.size()));
+					tm.put(nameFld.getText(), new Person(nameFld.getText(), phoneFld.getText()));
+					cntFld.setText(Integer.toString(tm.size()));
 					nameFld.setText("");
-					phoneFld.setText("");
+					phoneFld.setValue(null);
 					nameFld.requestFocusInWindow();
 				} else {
 					JOptionPane.showMessageDialog(null, "Incorrect phone number entered", "Incorrect Data",
@@ -107,8 +112,12 @@ public class NoteBook extends JFrame {
 
 		printBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (Person p : ts) {
-					System.out.println(p.toString());
+				/*
+				 * for (Person p : ts) { System.out.println(p.toString()); }
+				 */
+				for (Map.Entry<String, Person> m : tm.entrySet()) {
+					System.out.println(m.getValue().toString());
+
 				}
 			}
 		});

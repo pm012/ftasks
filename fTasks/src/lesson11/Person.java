@@ -32,7 +32,7 @@ public class Person implements Comparable {
 	}
 
 	public String toString() {
-		return this.getName() + " " + this.getPhone() + "\n";
+		return "Name: " + this.getName() + " Phone: " + this.getPhone() + "\n";
 
 	}
 
